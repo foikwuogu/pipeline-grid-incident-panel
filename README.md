@@ -1,4 +1,7 @@
 # Pipeline and Grid Cyber-Physical Incident Panel
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1234567.svg)](https://doi.org/10.5281/zenodo.1234567)
+
 ## Dataset overview
 
 The *Pipeline and Grid Cyber-Physical Incident Panel (v1.0)* is a unified
