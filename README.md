@@ -11,6 +11,41 @@ Affiliation: Independent Researcher, Odessa, Texas, USA
 **Version:** v1.0 (target: Jan 2027) — **Flagship 2**
 **Status:** Pipeline built. Data not yet fetched or released — see "Current status."
 
+## Dataset overview
+
+The *Pipeline and Grid Cyber-Physical Incident Panel (v1.0)* is a unified
+research dataset that harmonizes PHMSA pipeline incident records and DOE OE-417
+electric disturbance reports into a single, structured panel suitable for
+cyber-physical infrastructure analysis. The project integrates multiple federal
+data sources, standardizes schema and terminology, and applies a control-system
+and telecommunications involvement classification to each record using a
+structured YAML taxonomy. This classification identifies SCADA involvement,
+telemetry involvement, telecom involvement, cyber indicators, and other
+control-system relevance signals across both pipeline and electric grid
+incidents.
+
+The dataset includes **12,935 total records**, consisting of **9,654 PHMSA
+incidents** and **3,281 OE-417 disturbance reports**, covering the period
+beginning in 2010. All records are harmonized into a consistent column
+structure, normalized date formats, unified incident categories, and
+standardized system-type labels. The pipeline produces a complete provenance
+trail, including a harmonized CSV file, a provenance JSON file documenting
+metadata and run parameters, and detailed fetch and join logs to ensure
+reproducibility and auditability.
+
+This repository contains the full processing pipeline, configuration files,
+classification taxonomy, raw data inputs, and generated outputs. The unified
+dataset is released under the Creative Commons Attribution 4.0 License (CC BY
+4.0), and all underlying source data originates from public-domain U.S.
+Government datasets provided by PHMSA and the Department of Energy.
+
+This work was created by **Friday Ogochukwu Ikwuogu**, an independent
+researcher specializing in critical infrastructure and cyber-physical systems.
+ORCID: 0009-0009-2222-1318.
+GitHub: https://github.com/foikwuogu
+Portfolio: https://foikwuogu.github.io
+Email: Friday.ikwuogu@gmail.com
+
 ## What this is
 
 A harmonized panel joining two public federal incident sources:
