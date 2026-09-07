@@ -1,6 +1,7 @@
 # Pipeline and Grid Cyber-Physical Incident Panel
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1234567.svg)](https://doi.org/10.5281/zenodo.1234567)
+[![DOI](https://img.shields.io/badge/IEEE%20DataPort-10.21227/je8k--me02-blue)](https://doi.org/10.21227/je8k-me02)
 
 ## Dataset overview
 
@@ -35,6 +36,12 @@ ORCID: 0009-0009-2222-1318
 GitHub: [https://github.com/foikwuogu](https://github.com/foikwuogu)
 Portfolio: [https://foikwuogu.github.io](https://foikwuogu.github.io)
 Email: Friday.ikwuogu@gmail.com
+
+## Citation
+
+Friday Ogochukwu Ikwuogu, “PHMSA + OE-417 Unified Incident Dataset v1.0,” IEEE DataPort, doi:10.21227/je8k-me02.
+
+APA Citation: Ikwuogu, F. O. (2026). PHMSA + OE-417 Unified Incident Dataset v1.0. IEEE DataPort. https://doi.org/10.21227/je8k-me02
 
 ## How to view your pipeline output in your browser
 
