@@ -145,10 +145,5 @@ pipeline-grid-incident-panel/
 │   ├── raw/        (fixtures now; live pulls land here with --full)
 │   └── processed/  (final panel lands here)
 ```
-**Author:** Friday Ogochukwu Ikwuogu
-ORCID: 0009-0009-2222-1318 · Google Scholar: https://scholar.google.com/citations?pli=1&authuser=3&user=XADxRNkAAAAJ
-ResearchGate: https://www.researchgate.net/profile/Friday-O-Ikwuogu/research
-GitHub: https://github.com/foikwuogu · Portfolio: foikwuogu.github.io
-LinkedIn: Ogochukwu Friday Ikwuogu — https://www.linkedin.com/in/foikwuogu/
-Email: Friday.ikwuogu@gmail.com
-Affiliation: Independent Researcher, Odessa, Texas, USA
+
+
