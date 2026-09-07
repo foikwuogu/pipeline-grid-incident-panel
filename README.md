@@ -14,37 +14,76 @@ Affiliation: Independent Researcher, Odessa, Texas, USA
 ## Dataset overview
 
 The *Pipeline and Grid Cyber-Physical Incident Panel (v1.0)* is a unified
-research dataset that harmonizes PHMSA pipeline incident records and DOE OE-417
-electric disturbance reports into a single, structured panel suitable for
-cyber-physical infrastructure analysis. The project integrates multiple federal
-data sources, standardizes schema and terminology, and applies a control-system
-and telecommunications involvement classification to each record using a
-structured YAML taxonomy. This classification identifies SCADA involvement,
-telemetry involvement, telecom involvement, cyber indicators, and other
-control-system relevance signals across both pipeline and electric grid
-incidents.
+research dataset created by **Friday Ogochukwu Ikwuogu**. It harmonizes PHMSA
+pipeline incident records and DOE OE-417 electric disturbance reports into a
+single, structured panel suitable for cyber-physical infrastructure analysis.
+The project integrates multiple federal data sources, standardizes schema and
+terminology, and applies a control-system and telecommunications involvement
+classification to each record using a structured YAML taxonomy. This
+classification identifies SCADA involvement, telemetry involvement, telecom
+involvement, cyber indicators, and other control-system relevance signals across
+both pipeline and electric grid incidents.
 
-The dataset includes **12,935 total records**, consisting of **9,654 PHMSA
-incidents** and **3,281 OE-417 disturbance reports**, covering the period
-beginning in 2010. All records are harmonized into a consistent column
-structure, normalized date formats, unified incident categories, and
-standardized system-type labels. The pipeline produces a complete provenance
-trail, including a harmonized CSV file, a provenance JSON file documenting
-metadata and run parameters, and detailed fetch and join logs to ensure
-reproducibility and auditability.
+The dataset contains **12,935 records**, consisting of **9,654 PHMSA incidents**
+and **3,281 OE-417 disturbance reports** beginning in 2010. All records are
+harmonized into a consistent column structure with normalized date formats,
+unified incident categories, and standardized system-type labels. The pipeline
+produces a complete provenance trail, including a harmonized CSV file, a
+provenance JSON file documenting metadata and run parameters, and detailed fetch
+and join logs to ensure reproducibility and auditability. This repository
+includes the full processing pipeline, configuration files, classification
+taxonomy, raw data inputs, and generated outputs. The unified dataset is
+released under the Creative Commons Attribution 4.0 License (CC BY 4.0), and
+all underlying source data originates from public-domain U.S. Government
+datasets provided by PHMSA and the Department of Energy.
 
-This repository contains the full processing pipeline, configuration files,
-classification taxonomy, raw data inputs, and generated outputs. The unified
-dataset is released under the Creative Commons Attribution 4.0 License (CC BY
-4.0), and all underlying source data originates from public-domain U.S.
-Government datasets provided by PHMSA and the Department of Energy.
-
-This work was created by **Friday Ogochukwu Ikwuogu**, an independent
+This work was created solely by **Friday Ogochukwu Ikwuogu**, an independent
 researcher specializing in critical infrastructure and cyber-physical systems.
-ORCID: 0009-0009-2222-1318.
-GitHub: https://github.com/foikwuogu
-Portfolio: https://foikwuogu.github.io
+
+ORCID: 0009-0009-2222-1318
+GitHub: [https://github.com/foikwuogu](https://github.com/foikwuogu)
+Portfolio: [https://foikwuogu.github.io](https://foikwuogu.github.io)
 Email: Friday.ikwuogu@gmail.com
+
+## How to view your pipeline output in your browser
+
+After cloning the repository, users can view the harmonized dataset and its
+visualizations directly in their browser through the included dashboard. The
+dashboard reads the generated output files, such as `phmsa_oe417_unified.csv`
+and `provenance.json`, and displays interactive charts and summaries.
+
+To launch the dashboard, run the Streamlit application from the project root:
+
+```bash
+streamlit run src/dashboard.py
+```
+
+This starts a local server and automatically opens the dashboard in the browser
+at:
+
+```text
+http://localhost:8501
+```
+
+If the browser does not open automatically, manually navigate to that address.
+The dashboard presents incident counts by year, customers affected, disturbance
+type distributions, and additional visualizations included in the project. This
+allows users to explore the unified PHMSA + OE-417 dataset interactively without
+needing to inspect raw CSV files.
+
+Users may also open the output files directly. The harmonized dataset is located
+at `output/phmsa_oe417_unified.csv`, and the provenance metadata is available at
+`output/provenance.json`. These files can be viewed in any spreadsheet
+application or within VS Code's built-in data viewer. The logs generated during
+pipeline execution are stored in:
+
+```text
+output/logs/fetch.log
+output/logs/join.log
+```
+
+These logs provide full transparency into the ingestion, harmonization, and
+classification processes.
 
 ## What this is
 
