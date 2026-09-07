@@ -1,16 +1,4 @@
 # Pipeline and Grid Cyber-Physical Incident Panel
-
-**Author:** Friday Ogochukwu Ikwuogu
-ORCID: 0009-0009-2222-1318 · Google Scholar: https://scholar.google.com/citations?pli=1&authuser=3&user=XADxRNkAAAAJ
-ResearchGate: https://www.researchgate.net/profile/Friday-O-Ikwuogu/research
-GitHub: https://github.com/foikwuogu · Portfolio: foikwuogu.github.io
-LinkedIn: Ogochukwu Friday Ikwuogu — https://www.linkedin.com/in/foikwuogu/
-Email: Friday.ikwuogu@gmail.com | ikwuogu_f57913@utpb.edu | ogochukwu.f.ikwuogu@ieee.org
-Affiliation: Independent Researcher, Odessa, Texas, USA
-
-**Version:** v1.0 (target: Jan 2027) — **Flagship 2**
-**Status:** Pipeline built. Data not yet fetched or released — see "Current status."
-
 ## Dataset overview
 
 The *Pipeline and Grid Cyber-Physical Incident Panel (v1.0)* is a unified
@@ -197,12 +185,4 @@ pipeline-grid-incident-panel/
 │   └── processed/  (final panel lands here)
 ```
 
-## Next steps for you
 
-1. Make the Dec 18, 2026 scoping call and record the reasoning (a line or two
-   is enough — this is what "documented" means for a reviewer).
-2. Fill in `config/control_system_telecom_classification.yaml`.
-3. Run `demo_run` locally to sanity-check on fixtures, then `pipeline.py
-   --full` on a networked machine for the real pull.
-4. Reserve Zenodo + IEEE DataPort DOIs and drop them into this README before
-   release.
