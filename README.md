@@ -1,0 +1,134 @@
+# Pipeline and Grid Cyber-Physical Incident Panel
+
+**Author:** Friday Ogochukwu Ikwuogu
+ORCID: 0009-0009-2222-1318 · Google Scholar: https://scholar.google.com/citations?pli=1&authuser=3&user=XADxRNkAAAAJ
+ResearchGate: https://www.researchgate.net/profile/Friday-O-Ikwuogu/research
+GitHub: https://github.com/foikwuogu · Portfolio: foikwuogu.github.io
+LinkedIn: Ogochukwu Friday Ikwuogu — https://www.linkedin.com/in/foikwuogu/
+Email: Friday.ikwuogu@gmail.com | ikwuogu_f57913@utpb.edu | ogochukwu.f.ikwuogu@ieee.org
+Affiliation: Independent Researcher, Odessa, Texas, USA
+
+**Version:** v1.0 (target: Jan 2027) — **Flagship 2**
+**Status:** Pipeline built. Data not yet fetched or released — see "Current status."
+
+## What this is
+
+A harmonized panel joining two public federal incident sources:
+
+- **PHMSA** pipeline incident/accident reports (gas transmission & gathering,
+  gas distribution, hazardous liquid) — 49 CFR Parts 191, 195.
+- **DOE OE-417** Electric Emergency Incident and Disturbance Reports.
+
+into one common schema, with a control-system / telecommunications
+involvement classification layer on top (was the incident cause or
+contributing factor a SCADA/control-system failure, a communications outage,
+or similar — as opposed to purely mechanical, weather, or excavation-damage
+causes).
+
+License on release: **CC BY**, all inputs are public-domain US government
+data. Planned distribution: Zenodo (DOI) and IEEE DataPort (DOI).
+
+## Open dependency — read this first
+
+**Coverage is not finalized.** Per the plan this supports, a scoping decision
+due **Dec 18, 2026** determines whether this panel covers:
+
+- **Option A — full 1986-onward**: PHMSA's earliest standardized incident
+  reporting. OE-417 detailed per-event data only goes back to ~2000-2002 (DOE
+  didn't digitize incident-level Excel summaries before that), so under this
+  option, 1986-1999 rows would be PHMSA-only with OE-417 columns blank —
+  documented as such, not left ambiguous.
+- **Option B — 2010-onward**: the range where both sources have consistent,
+  comparable digital detail, at the cost of dropping 24 years of PHMSA
+  history.
+
+This pipeline is built to run either way — set `--start-year 1986` or
+`--start-year 2010` (default) when you run `pipeline.py`. **The scoping
+decision itself is yours to make**; this README and the dataset's own
+metadata should state whichever option you choose once decided, and the
+choice should be documented in the manifest DOE/PHMSA reviewers would expect
+to see (why that cutoff, what it includes/excludes).
+
+## Data sources (all public, no auth required)
+
+| Source | Used for | URL |
+|---|---|---|
+| PHMSA source data | Gas transmission/gathering, gas distribution, hazardous liquid incident CSVs | https://www.phmsa.dot.gov/data-and-statistics/pipeline/source-data |
+| DOE OE-417 annual summaries | Electric disturbance/emergency event records, per year, XLS | https://www.oe.netl.doe.gov/OE417_annual_summary.aspx |
+
+Both are public-domain US federal government works — no license restriction
+on reuse, which is why CC BY (not ODbL) is the right release license here;
+CC BY is added by you as the harmonizer, on top of public-domain inputs.
+
+## Division of labor
+
+- **Claude (this pipeline):** fetch, parse, schema harmonization, and join
+  code; versioning/manifest scaffolding; documentation.
+- **Client (you) owns and has supplied:**
+  `config/control_system_telecom_classification.yaml` — 7 categories (scada,
+  telemetry, telecom, control_center, cyber, automation, sensor), each with
+  keywords, regex, and a source_system filter; plus incident_id overrides and
+  keyword-scoped exclusion phrases (e.g. "radio" as a telecom keyword doesn't
+  fire on "police radio"). Verified against the fixture set — see "Current
+  status."
+
+## Current status — read before you cite or release anything
+
+This container has **no outbound network access**, so I could not execute the
+live fetch against phmsa.dot.gov or oe.netl.doe.gov from here. What's in this
+package:
+
+- Fully written fetch/harmonize/join scripts (`src/`) that run end-to-end the
+  moment you execute them on a machine with internet access.
+- A small fixture set (`data/raw/sample_*.csv`) — a handful of hand-entered
+  rows matching each source's real public schema, so `src/join.py`'s
+  harmonization logic is demonstrated on the right structure.
+- `pipeline.py --demo` runs the full harmonization on fixtures only, no
+  network calls, so you can see the output shape before pointing it at the
+  real feeds.
+
+**To produce the real v1.0 file:** run
+`python src/pipeline.py --full --start-year 2010` (or `1986`, once the Dec 18
+scoping decision is made) on a machine with internet access. It fetches
+current PHMSA + OE-417 data, harmonizes, classifies, and writes
+`output/phmsa_oe417_unified.csv` plus `output/provenance.json`
+(fetch timestamps, row counts, source URLs, and the start-year choice — this
+last one matters for provenance, since it directly drives what's included).
+The run also writes `output/logs/fetch.log` and `output/logs/join.log`.
+
+If PHMSA or DOE blocks automated downloads from your network, download the
+source files in a browser and place them in `data/raw/`, then rerun `--full`.
+The PHMSA fetcher reads the official incident TXT/ZIP files. The OE-417 fetcher
+tries the annual direct pattern `https://www.oe.netl.doe.gov/docs/OE417_<YEAR>.xls`
+for 2002-2025 and can also read local annual `.xls`/`.xlsx` files named like
+`OE417_2010.xls` through `OE417_2025.xls`. If `oe417.csv` is present, the
+pipeline skips XLS ingestion and uses that combined CSV instead.
+
+## Repository layout
+
+```
+pipeline-grid-incident-panel/
+├── README.md
+├── requirements.txt
+├── config/
+│   └── control_system_telecom_classification.yaml   # TODO — you own this
+├── src/
+│   ├── fetch_phmsa.py
+│   ├── fetch_oe417.py
+│   ├── harmonize.py
+│   ├── join.py
+│   └── pipeline.py
+├── data/
+│   ├── raw/        (fixtures now; live pulls land here with --full)
+│   └── processed/  (final panel lands here)
+```
+
+## Next steps for you
+
+1. Make the Dec 18, 2026 scoping call and record the reasoning (a line or two
+   is enough — this is what "documented" means for a reviewer).
+2. Fill in `config/control_system_telecom_classification.yaml`.
+3. Run `demo_run` locally to sanity-check on fixtures, then `pipeline.py
+   --full` on a networked machine for the real pull.
+4. Reserve Zenodo + IEEE DataPort DOIs and drop them into this README before
+   release.

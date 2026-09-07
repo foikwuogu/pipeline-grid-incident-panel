@@ -1,0 +1,5 @@
+Event ID,Date Event Began,Geographic Areas,Event Type,Number of Fatalities,Number of Injuries,Estimated Cost
+OE-2024-011,2024-06-01,TX,Suspected cyber event affecting control center dispatch,0,0,0
+OE-2023-045,2023-07-22,CA,Severe weather - wildfire; weather radio and public safety radio also affected,0,0,500000
+OE-2022-102,2022-01-14,NY,Physical attack - substation; backhaul carrier outage during response,0,0,75000
+OE-2021-077,2021-03-10,MI,Security breach detected on utility satellite link,0,0,0

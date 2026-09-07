@@ -1,0 +1,5 @@
+REPORT_NUMBER,IDATE,ISTATE,CAUSE,FATAL,INJURE,PROPERTY_DAMAGE_COST
+20240001,2024-02-09,TX,SCADA system malfunction caused valve to remain open,0,0,150000
+20240002,2024-05-14,OK,Excavation damage by third-party contractor,0,1,320000
+20230011,2023-11-02,LA,Corrosion - external,0,0,45000
+20240333,2024-07-19,TX,Pressure transmitter failure led to erroneous reading and delayed shutdown,0,0,88000

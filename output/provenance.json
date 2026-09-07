@@ -1,0 +1,86 @@
+{
+  "title": "PHMSA + OE-417 Unified Incident Dataset",
+  "description": "A harmonized dataset combining PHMSA pipeline incidents and DOE OE-417 electric disturbance events. Includes unified schema, classification labels, provenance, and source URLs.",
+  "dataset_version": "v1.0",
+  "version": "v1.0",
+  "upload_type": "dataset",
+  "run_mode": "full",
+  "start_year": 2010,
+  "generated_at_utc": "2026-09-07T17:10:45.960374+00:00",
+  "row_count": 12935,
+  "row_count_by_source": {
+    "PHMSA": 9654,
+    "OE-417": 3281
+  },
+  "creators": [
+    {
+      "name": "Friday Ogochukwu Ikwuogu",
+      "orcid": "0009-0009-2222-1318",
+      "affiliation": "Independent Researcher, Odessa, Texas, USA"
+    }
+  ],
+  "keywords": [
+    "PHMSA",
+    "OE-417",
+    "Pipeline Safety",
+    "Electric Disturbance",
+    "Critical Infrastructure",
+    "SCADA",
+    "Telemetry",
+    "Cyber Events",
+    "Telecom Outages"
+  ],
+  "sources": {
+    "phmsa": [
+      "https://www.phmsa.dot.gov/",
+      "https://www.phmsa.dot.gov/data-and-statistics/pipeline/distribution-transmission-gathering-lng-and-liquid-accident-and-incident-data"
+    ],
+    "oe417": [
+      "https://www.oe.netl.doe.gov/",
+      "https://www.oe.netl.doe.gov/OE417_annual_summary.aspx",
+      "https://www.oe.netl.doe.gov/docs/OE417_<YEAR>.xls"
+    ]
+  },
+  "provenance": {
+    "start_year": 2010,
+    "generated_on": "2026-09-07",
+    "sources": {
+      "phmsa": [
+        "https://www.phmsa.dot.gov/",
+        "https://www.phmsa.dot.gov/data-and-statistics/pipeline/distribution-transmission-gathering-lng-and-liquid-accident-and-incident-data"
+      ],
+      "oe417": [
+        "https://www.oe.netl.doe.gov/",
+        "https://www.oe.netl.doe.gov/docs/OE417_<YEAR>.xls"
+      ]
+    },
+    "fetch_timestamps": {
+      "phmsa": "2026-09-07T17:10:45.960374+00:00",
+      "oe417": "2026-09-07T17:10:45.960374+00:00"
+    },
+    "row_counts": {
+      "phmsa": 9654,
+      "oe417": 3281,
+      "combined": 12935
+    }
+  },
+  "files": [
+    "output/phmsa_oe417_unified.csv",
+    "output/provenance.json",
+    "output/logs/fetch.log",
+    "output/logs/join.log",
+    "config/control_system_telecom_classification.yaml"
+  ],
+  "contacts": {
+    "google_scholar": "https://scholar.google.com/citations?pli=1&authuser=3&user=XADxRNkAAAAJ",
+    "researchgate": "https://www.researchgate.net/profile/Friday-O-Ikwuogu/research",
+    "github": "https://github.com/foikwuogu",
+    "portfolio": "Ikwuogufoikwuogu.github.io",
+    "linkedin": "Ogochukwu Friday Ikwuogu",
+    "email": "Friday.ikwuogu@gmail.com|ikwuogu_f57913@utpb.edu | ogochukwu.f.ikwuogu@ieee.org"
+  },
+  "author": "Friday Ogochukwu Ikwuogu (ORCID 0009-0009-2222-1318)",
+  "license": "CC BY",
+  "note_if_demo": null,
+  "note_on_scoping": "start_year reflects the Dec 18, 2026 scoping decision (1986 vs 2010 onward) \u2014 confirm this matches the final decision before release."
+}

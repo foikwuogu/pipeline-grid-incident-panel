@@ -1,0 +1,243 @@
+# CONTROL-SYSTEM / TELECOMMUNICATIONS INVOLVEMENT CLASSIFICATION
+# Owned and defined by the client (Friday Ogochukwu Ikwuogu).
+#
+# Applied to the harmonized panel's 'cause_text' field (see src/harmonize.py
+# for how PHMSA cause/subcause and OE-417 event-type/cause columns feed into
+# that one field). Matching logic per row, in order (see src/join.py):
+#   1. Manual override by incident_id, if present — wins outright, no
+#      keyword/regex evaluation.
+#   2. Each category's keywords (lowercase substring) and regex are tested,
+#      restricted to source_system if the category sets one.
+#   3. A keyword hit is suppressed if every occurrence of that keyword in the
+#      row's text sits inside an exclude_keywords phrase (see the 'radio'
+#      example below) — a hit elsewhere in the same text still counts.
+#   4. A row can match more than one category.
+#
+# Regex patterns are (?i) case-insensitive by convention in this file, even
+# though src/join.py also applies re.IGNORECASE independently — the inline
+# flag is kept for readability and in case this file is ever tested outside
+# that harness (e.g. regex101, a quick grep).
+
+patterns:
+  - label: scada
+    description: "SCADA / EMS / DMS — supervisory control, energy management, distribution management systems, and their operator interfaces"
+    keywords:
+      - "scada"
+      - "ems"
+      - "dms"
+      - "energy management system"
+      - "distribution management system"
+      - "supervisory control and data acquisition"
+      - "hmi"
+      - "human machine interface"
+      - "human-machine interface"
+      - "master station"
+      - "front end processor"
+      - "control system"
+      - "dispatch system"
+      - "automation system"
+    regex:
+      - "(?i)\\bscada[- ]?system\\b"
+      - "(?i)\\bscada\\b"
+      - "(?i)\\b(energy|distribution)\\s+management\\s+system\\b"
+      - "(?i)\\b(ems|dms)[- ]?system\\b"
+      - "(?i)\\bhmi\\b"
+      - "(?i)\\be\\.?m\\.?s\\.?\\b"          # EMS / E.M.S.
+      - "(?i)\\bd\\.?m\\.?s\\.?\\b"          # DMS / D.M.S.
+    source_system: ["PHMSA", "OE-417"]
+
+  - label: telemetry
+    description: "Telemetry / RTU / PLC / IED — field controllers and the data links that carry their readings back to a control system"
+    keywords:
+      - "telemetry"
+      - "rtu"
+      - "remote terminal unit"
+      - "plc"
+      - "programmable logic controller"
+      - "ied"
+      - "intelligent electronic device"
+      - "remote operation"
+      - "remote monitoring"
+      - "data acquisition"
+      - "loss of telemetry"
+      - "measurement system"
+      - "monitoring system"
+    regex:
+      - "(?i)\\brtus?\\b"                     # rtu / rtus
+      - "(?i)\\bplc(s)?\\b"                    # plc / plcs
+      - "(?i)\\bied(s)?\\b"                    # ied / ieds
+      - "(?i)telemetr(y|ic)"                   # telemetry / telemetric
+      - "(?i)remote\\s+terminal\\s+unit(s)?"
+      - "(?i)programmable\\s+logic\\s+controller(s)?"
+      - "(?i)loss\\s+of\\s+telemetry"
+      - "(?i)data[- ]?acquisition"
+    source_system: ["PHMSA", "OE-417"]
+
+  - label: telecom
+    description: "Communications / telecom — microwave, fiber, radio links, and general comms-path outages carrying control-system traffic"
+    keywords:
+      - "microwave"
+      - "fiber"
+      - "fiber optic"
+      - "fibre"                                 # British spelling variant, seen in some vendor docs
+      - "radio link"
+      - "radio"
+      - "telecom"
+      - "telecommunication"
+      - "telecommunications"
+      - "communication system"
+      - "communications system"
+      - "communication network"
+      - "wan"
+      - "wide area network"
+      - "leased line"
+      - "vsat"
+      - "loss of communication"
+      - "loss of communications"
+      - "comms outage"
+      - "comm failure"
+      - "fiber cut"
+      - "network outage"
+      - "carrier outage"
+      - "backhaul"
+      - "satellite link"
+    regex:
+      - "(?i)fib(er|re)[- ]?optic"
+      - "(?i)tele[- ]?com(m|munications?)?\\b"    # telecom / tele-com / telecommunication(s)
+      - "(?i)radio\\s+link"
+      - "(?i)loss\\s+of\\s+comm(unication|s)?"
+      - "(?i)communication(s)?\\s+(system|network|failure|outage|loss)"
+      - "(?i)\\bw\\.?a\\.?n\\.?\\b"
+      - "(?i)fiber(\\s+cut)?"
+      - "(?i)network[- ]?outage"
+    source_system: ["PHMSA", "OE-417"]
+
+  - label: control_center
+    description: "Control center / dispatch / outage management"
+    keywords:
+      - "control center"
+      - "control centre"
+      - "control room"
+      - "dispatch"
+      - "dispatcher"
+      - "dispatch center"
+      - "outage management system"
+      - "oms"
+      - "system operator"
+      - "operations center"
+    regex:
+      - "(?i)dispatch(er|ing)?\\b"
+      - "(?i)\\boms\\b"
+      - "(?i)control\\s+(cent(er|re)|room)"
+      - "(?i)operations?\\s+cent(er|re)"
+    source_system: ["PHMSA", "OE-417"]
+
+  - label: cyber
+    description: "Cyber indicators — suspected, confirmed, intrusion, malware, unauthorized access, denial of service"
+    keywords:
+      - "cyber"
+      - "cyberattack"
+      - "cyber attack"
+      - "cyber event"
+      - "cyber incident"
+      - "cyber intrusion"
+      - "intrusion"
+      - "unauthorized access"
+      - "unauthorized use"
+      - "malware"
+      - "ransomware"
+      - "phishing"
+      - "denial of service"
+      - "ddos"
+      - "network breach"
+      - "data breach"
+      - "compromised credentials"
+      - "suspicious network activity"
+      - "suspected cyber event"
+      - "security breach"
+      - "compromise"
+    regex:
+      - "(?i)cyber[- ]?(attack|event|incident|intrusion)?"
+      - "(?i)unauthorized\\s+(access|use)"
+      - "(?i)\\b(malware|ransomware|phishing)\\b"
+      - "(?i)denial[- ]of[- ]service"
+      - "(?i)\\bddos\\b"
+      - "(?i)(network|data)\\s+breach"
+      - "(?i)\\bbreach(ed|es)?\\b"
+    source_system: ["PHMSA", "OE-417"]
+
+  - label: automation
+    description: "Automation / remote operations — automated switching, remote/autonomous control actions"
+    keywords:
+      - "automation"
+      - "automated"
+      - "automated switching"
+      - "automatic switching"
+      - "remote operation"
+      - "remote control"
+      - "remote switching"
+      - "autonomous control"
+      - "auto-restoration"
+      - "automatic restoration"
+      - "self-healing grid"
+      - "unintended automatic operation"
+    regex:
+      - "(?i)automat(ed|ion|ic)"
+      - "(?i)remote\\s+(operation|control|switching)"
+      - "(?i)auto[- ]?restoration"
+      - "(?i)self[- ]healing"
+      - "(?i)unintended\\s+automatic\\s+operation"
+    source_system: ["PHMSA", "OE-417"]
+
+  - label: sensor
+    description: "Sensor / instrumentation failures — field measurement devices, gauges, transducers"
+    keywords:
+      - "sensor failure"
+      - "sensor malfunction"
+      - "instrumentation"
+      - "instrumentation failure"
+      - "transducer"
+      - "gauge malfunction"
+      - "gauge failure"
+      - "loss of signal"
+      - "signal failure"
+      - "measurement error"
+      - "faulty reading"
+      - "erroneous reading"
+      - "pressure transmitter"
+      - "flow meter malfunction"
+    regex:
+      - "(?i)sensor\\s+(failure|malfunction|fault)"
+      - "(?i)instrumentation\\s+(failure|malfunction)"
+      - "(?i)loss\\s+of\\s+signal"
+      - "(?i)(pressure|flow|level)\\s+(transmitter|transducer|sensor)\\s+(failure|malfunction)?"
+      - "(?i)(faulty|erroneous)\\s+reading"
+    source_system: ["PHMSA", "OE-417"]
+
+# Manual overrides — win outright over keyword/regex matching, for specific
+# incidents where the automated match is known to be wrong, or where you've
+# hand-verified a label from the full narrative text (which is usually much
+# longer and more detailed than the short cause field this classifier reads).
+#
+# LEFT AS PLACEHOLDERS ON PURPOSE: these can't be filled in until after the
+# first --full run, when you have real PHMSA/OE-417 incident IDs in front of
+# you to inspect and label. Replace/extend this list then.
+overrides:
+  - incident_id: "PHMSA-YYYY-NNNNN"
+    label: scada
+  - incident_id: "OE417-YYYY-NNNN"
+    label: telecom
+
+# Exclusion phrases: if one of these appears in the row's cause_text, any
+# keyword match that comes ONLY from a substring contained within that
+# phrase is suppressed for that row (a different keyword in the same row
+# still counts normally — see src/join.py's _keyword_is_excluded).
+exclude_keywords:
+  - "police radio"
+  - "first responder radio"
+  - "amateur radio"
+  - "emergency responder radio"
+  - "public safety radio"
+  - "weather radio"
+
+no_match_label: "not control-system/telecom related"
