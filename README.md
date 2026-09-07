@@ -125,18 +125,6 @@ Both are public-domain US federal government works — no license restriction
 on reuse, which is why CC BY (not ODbL) is the right release license here;
 CC BY is added by you as the harmonizer, on top of public-domain inputs.
 
-## Division of labor
-
-- **Claude (this pipeline):** fetch, parse, schema harmonization, and join
-  code; versioning/manifest scaffolding; documentation.
-- **Client (you) owns and has supplied:**
-  `config/control_system_telecom_classification.yaml` — 7 categories (scada,
-  telemetry, telecom, control_center, cyber, automation, sensor), each with
-  keywords, regex, and a source_system filter; plus incident_id overrides and
-  keyword-scoped exclusion phrases (e.g. "radio" as a telecom keyword doesn't
-  fire on "police radio"). Verified against the fixture set — see "Current
-  status."
-
 ## Current status — read before you cite or release anything
 
 This container has **no outbound network access**, so I could not execute the
